@@ -15,8 +15,25 @@
         .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
         .product { background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center; }
         .product img { max-width: 100%; height: 200px; object-fit: cover; }
+        .buttons { margin-top: 1rem; }
+        button { background-color: #28a745; color: white; border: none; padding: 0.5rem 1rem; cursor: pointer; margin: 0.25rem; }
+        button:hover { background-color: #218838; }
+        #checkout { display: none; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin-top: 2rem; }
+        form { display: flex; flex-direction: column; gap: 1rem; }
+        label { font-weight: bold; }
+        input, select, textarea { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
         footer { background-color: #333; color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
     </style>
+    <script>
+        function showCheckout() {
+            document.getElementById('checkout').style.display = 'block';
+            window.location.hash = '#checkout';
+        }
+        function submitOrder() {
+            alert('Order submitted! (This is a demo; in a real site, this would process payment and shipping.)');
+            // Reset form or redirect
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -29,41 +46,85 @@
             <li><a href="#products">Products</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="#checkout" onclick="showCheckout()">Checkout</a></li>
         </ul>
     </nav>
     <div class="container">
         <section id="home">
             <h2>Welcome to Shoe Haven</h2>
-            <p>Discover the latest trends in footwear. From casual sneakers to formal shoes, we have it all at unbeatable prices.</p>
+            <p>Discover the latest trends in footwear. From casual sneakers to formal shoes, we have it all at unbeatable prices in INR.</p>
         </section>
         <section id="products">
             <h2>Featured Products</h2>
             <div class="products">
                 <div class="product">
-                    <img src="https://via.placeholder.com/250x200?text=Sneakers" alt="Sneakers">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=250&h=200&fit=crop" alt="Casual Sneakers">
                     <h3>Casual Sneakers</h3>
-                    <p>$49.99</p>
-                    <button>Add to Cart</button>
+                    <p>MRP: ₹499</p>
+                    <div class="buttons">
+                        <button>Add to Cart</button>
+                        <button onclick="showCheckout()">Buy Now</button>
+                    </div>
                 </div>
                 <div class="product">
-                    <img src="https://via.placeholder.com/250x200?text=Boots" alt="Boots">
+                    <img src="https://images.unsplash.com/photo-1544966503-7cc5ac882d5f?w=250&h=200&fit=crop" alt="Leather Boots">
                     <h3>Leather Boots</h3>
-                    <p>$79.99</p>
-                    <button>Add to Cart</button>
+                    <p>MRP: ₹799</p>
+                    <div class="buttons">
+                        <button>Add to Cart</button>
+                        <button onclick="showCheckout()">Buy Now</button>
+                    </div>
                 </div>
                 <div class="product">
-                    <img src="https://via.placeholder.com/250x200?text=Heels" alt="Heels">
+                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=250&h=200&fit=crop" alt="High Heels">
                     <h3>High Heels</h3>
-                    <p>$59.99</p>
-                    <button>Add to Cart</button>
+                    <p>MRP: ₹599</p>
+                    <div class="buttons">
+                        <button>Add to Cart</button>
+                        <button onclick="showCheckout()">Buy Now</button>
+                    </div>
                 </div>
                 <div class="product">
-                    <img src="https://via.placeholder.com/250x200?text=Sandals" alt="Sandals">
+                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=250&h=200&fit=crop" alt="Summer Sandals">
                     <h3>Summer Sandals</h3>
-                    <p>$29.99</p>
-                    <button>Add to Cart</button>
+                    <p>MRP: ₹299</p>
+                    <div class="buttons">
+                        <button>Add to Cart</button>
+                        <button onclick="showCheckout()">Buy Now</button>
+                    </div>
                 </div>
             </div>
+        </section>
+        <section id="checkout">
+            <h2>Checkout</h2>
+            <form onsubmit="submitOrder(); return false;">
+                <h3>Shipping Address</h3>
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" required>
+                
+                <label for="address">Address:</label>
+                <textarea id="address" rows="3" required></textarea>
+                
+                <label for="city">City:</label>
+                <input type="text" id="city" required>
+                
+                <label for="state">State:</label>
+                <input type="text" id="state" required>
+                
+                <label for="pincode">Pincode:</label>
+                <input type="text" id="pincode" required>
+                
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" required>
+                
+                <h3>Payment Method</h3>
+                <label><input type="radio" name="payment" value="card" required> Credit/Debit Card</label>
+                <label><input type="radio" name="payment" value="upi"> UPI (e.g., Google Pay, PhonePe)</label>
+                <label><input type="radio" name="payment" value="netbanking"> Net Banking</label>
+                <label><input type="radio" name="payment" value="cod"> Cash on Delivery</label>
+                
+                <button type="submit">Place Order</button>
+            </form>
         </section>
         <section id="about">
             <h2>About Us</h2>
@@ -71,7 +132,8 @@
         </section>
         <section id="contact">
             <h2>Contact Us</h2>
-            <p>Email: info@shoehaven.com | Phone: (123) 456-7890 | Address: 123 Shoe Street, City, State 12345</p>
+            <p>Email: suhailahmed0955@gmail.com | Phone: (91)6009019609  | Address: East batarashi, City dharmanagar State tripura 799253</p>
+           
         </section>
     </div>
     <footer>
